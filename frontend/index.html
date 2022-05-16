@@ -3,40 +3,46 @@
 	<head>
 		<meta charset="utf-8"/>
 		<title>Simple websocket client</title>
-		<style>
-			div {
-				width:100vw;
-				height:20vh;
-				overflow:scroll;
-			}
-		</style>
+		<link rel="preconnect" href="https://fonts.googleapis.com"/>
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+		<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet"/>
+		<link href="style.css" rel="stylesheet" type="text/css"/>
 	</head>
 	<body>
-		<h1 class="clientName">Client</h1>
+		<h1>Simple websocket chat</h1>
 		<div class="mainMessages"></div>
+		<input class="senderName" type="text" value="" placeHolder="name"></text>
+		<textarea class="textArea" placeHolder="message"/></textarea>
 		<button class="sendMessage">sendMessage</button>
 		<script>
-			var h1 = document.querySelector(".clientName");
-			h1.textContent += Math.floor(Math.random() * 100);
+			var textArea = document.querySelector(".textArea");
+			var input = document.querySelector(".senderName");
 			var div = document.querySelector(".mainMessages");
 			const socket = new WebSocket("ws://192.168.1.76:3000");
 			socket.addEventListener("open", function(event){
 				console.log("connected to ws server");
-				div.innerHTML += "<p>connected to ws server</p>";
+				div.innerHTML += `<p class="serverMessage">connected to ws server ${event.data} ${new Date().toString()}</p>`;
 			});
 			
 			socket.addEventListener("message", function(event){
-				div.innerHTML += `<p>message from server: ${event.data} ${new Date().toString()}</p>`;
+				div.innerHTML += `<p class="serverMessage">${event.data}</p>`;
+				console.log(event.data);
 				console.log("message from server: ", event.data);
+				div.scrollTop = div.scrollHeight;
 			});
 			
 			
 			function sendMessage(){
-				socket.send("Hello from Client1!");
+				console.log(`sent: ${input.value} : ${textArea.value}`)
+				div.innerHTML += `<p>${input.value} : ${textArea.value}</p>`;
+				socket.send(`${input.value} : ${textArea.value}`);
+				div.scrollTop = div.scrollHeight;
 			} 
 			
 			var button = document.querySelector(".sendMessage");
 			button.addEventListener("click", sendMessage);
+			
+
 		</script>
 	</body>
 </html>

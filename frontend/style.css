@@ -1,0 +1,97 @@
+			html {
+				background-color:black;
+			}
+			
+			body {
+				color:white;
+				display:flex;
+				flex-direction:column;
+				justify-content:space-evenly;
+				align-items:center;
+				font-size:62.5%;
+				font-family:Comfortaa;
+				background-color:#0092db;
+				width:100vw;
+				height:100vh;
+				margin:0;
+			}
+			
+			h1 {
+				font-size:2rem;
+				margin:0;
+				padding:1rem;
+				text-align:center;
+			}
+			
+			div {
+				width:100vw;
+				height:30vh;
+				overflow:scroll;
+			}
+			
+			p {
+				display:block;
+				font-size:1rem;
+				width:80vw;
+				margin-inline:auto;
+			}
+			
+			input[type="text"] {
+				color:inherit;
+				font-family:inherit;
+				background-color:rgba(255,255,255,0.4);
+				display:block;
+				outline:none;
+				border:none;
+				width:80vw;
+				border-radius:1rem;
+				padding:1rem;
+			}
+			
+			input[type="text"]::placeHolder {
+				color:rgba(255,255,255,0.6);
+			}
+			
+			textarea {
+				font-family:inherit; /*weird some properties do not inherit*/
+				color:inherit;
+				display:block;
+				outline:none;
+				border:none;
+				width:80vw;
+				height:20vh;
+				background-color:rgba(255,255,255,0.4);
+				border-radius:1rem;
+				padding:1rem;
+				overflow:scroll; /*is this default?*/
+			}
+			
+			textarea::placeHolder {
+				color:rgba(255,255,255,0.6);
+			}
+			
+			button {
+				color:inherit;
+				display:block;
+				cursor:pointer;
+				width:10rem;
+				height:4rem;
+				outline:none;
+				border:none;
+				background-color: rgba(255,255,255,0.4);
+				border-radius:1rem;
+			}
+			
+			button:hover {
+				background-color: rgba(255,255,255,0.5)
+			}
+			
+			button:active {
+				background-color: rgba(255,255,255,0.6)
+			}
+			
+			
+			.serverMessage {
+				text-align:right;
+			}
+			
