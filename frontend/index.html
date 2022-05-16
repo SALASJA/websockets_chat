@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8"/>
+		<title>Simple websocket client</title>
+		<style>
+			div {
+				width:100vw;
+				height:20vh;
+				overflow:scroll;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Client1</h1>
+		<div class="mainMessages"></div>
+		<button class="sendMessage">sendMessage</button>
+		<script>
+			var div = document.querySelector(".mainMessages");
+			const socket = new WebSocket("ws://192.168.1.76:3000");
+			socket.addEventListener("open", function(event){
+				console.log("connected to ws server");
+				div.innerHTML += "<p>connected to ws server</p>";
+			});
+			
+			socket.addEventListener("message", function(event){
+				console.log(div.innerHTML);
+				div.innerHTML += `<p>message from server: ${event.data} ${new Date().toString()}</p>`;
+				console.log(div);
+				console.log(div.innerHTML);
+				console.log("message from server: ", event.data);
+			});
+			
+			
+			function sendMessage(){
+				socket.send("Hello from Client1!");
+			} 
+			
+			var button = document.querySelector(".sendMessage");
+			button.addEventListener("click", sendMessage);
+		</script>
+	</body>
+</html>

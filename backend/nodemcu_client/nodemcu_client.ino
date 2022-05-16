@@ -36,6 +36,7 @@
 
 using namespace websockets2_generic;
 
+uint8_t value = 0;
 WebsocketsClient client;
 
 void onEventsCallback(WebsocketsEvent event, String data) 
@@ -120,5 +121,8 @@ void loop()
   if (client.available()) 
   {
     client.poll();
+    delay(1000);
+    client.send(String(value));
+    value++;
   }
 }
