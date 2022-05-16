@@ -14,7 +14,12 @@ wss.on("connection", function connection(ws) {
 	
 	ws.on("message", function incoming(message){
 		console.log("received: " + message);
-		ws.send("Got your message its: " + message);
+		//ws.send("Got your message its: " + message);
+		wss.clients.forEach(function each(client){
+			if(client !== ws && client.readyState === WebSocket.OPEN){
+				client.send(`${message}`);
+			}
+		});
 	});
 	
 });

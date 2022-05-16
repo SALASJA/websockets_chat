@@ -12,10 +12,12 @@
 		</style>
 	</head>
 	<body>
-		<h1>Client1</h1>
+		<h1 class="clientName">Client</h1>
 		<div class="mainMessages"></div>
 		<button class="sendMessage">sendMessage</button>
 		<script>
+			var h1 = document.querySelector(".clientName");
+			h1.textContent += Math.floor(Math.random() * 100);
 			var div = document.querySelector(".mainMessages");
 			const socket = new WebSocket("ws://192.168.1.76:3000");
 			socket.addEventListener("open", function(event){
@@ -24,10 +26,7 @@
 			});
 			
 			socket.addEventListener("message", function(event){
-				console.log(div.innerHTML);
 				div.innerHTML += `<p>message from server: ${event.data} ${new Date().toString()}</p>`;
-				console.log(div);
-				console.log(div.innerHTML);
 				console.log("message from server: ", event.data);
 			});
 			
